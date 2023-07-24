@@ -12,7 +12,7 @@ public class GestorMenus {
 	private Pasivo pasivo = new Pasivo(this);
 
 	private ArrayList<String> nivel0 = new ArrayList<>(Arrays.asList("pasivo", "activo", "tarjetas"));
-	private String salidaInicial = "Elija el numero del asunto que desee consultar: \n\t0. Salir \n\t1. Pasivo \n\t2. Activo \n\t3. Tarjetas \nEleccion: ";
+	private String salidaInicial = "Elija el numero del asunto que desee consultar:Salir Pasivo Activo Tarjetas";
 	private String salida = "Elija el numero del asunto que desee consultar: \n\t0. Salir\n";
 
 	// Numero para comprobar si tratamos Pasivo(1), Activo(2) o Tarjetas(3)
