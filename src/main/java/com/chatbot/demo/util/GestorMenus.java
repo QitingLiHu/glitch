@@ -27,27 +27,27 @@ public class GestorMenus {
 
 	// Methods
 	// Establecemos el flujo a seguir eligiendo entre las opciones del nivel 0.
-	public String comprobarNivel0(String respuesta) {
-		String msg = "Introduzca una opcion valida.";
+	public Response comprobarNivel0(String respuesta) {
+		Response msg = new Response();
 
 		try {
 			int resp = Integer.parseInt(respuesta);
-			msg = salida;
+			msg.setDescription(salida);
 
 			if (resp == 0) {
-				msg = "Pase un buen dia.";
+				msg.setDescription("Pase un buen dia.");
 
 			} else if (resp >= 1 && resp <= 3) {
 				tipoConsulta = resp;
-				comprobarRespuesta(respuesta);
+				msg = comprobarRespuesta(respuesta);
 			}
 
 		} catch (NumberFormatException ex) {
-			msg = salida;
+			msg.setDescription(salida);
 
 			String resp = respuesta.toLowerCase();
 			if (resp.equals("salir")) {
-				msg = "Pase un buen dia.";
+				msg.setDescription("Pase un buen dia.");
 
 			} else if (nivel0.contains(resp)) {
 				boolean encontrado = false;
@@ -64,12 +64,12 @@ public class GestorMenus {
 		return msg;
 	}
 
-	public String comprobarRespuesta(String respuesta) {
-		String msg = "Introduzca una opcion valida.";
-
+	public Response comprobarRespuesta(String respuesta) {
+		Response msg = new Response();
+		
 		switch (tipoConsulta) {
 		case 0:
-			comprobarNivel0(respuesta);
+			msg = comprobarNivel0(respuesta);
 			break;
 		case 1:
 			// Pasivo

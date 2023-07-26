@@ -2,14 +2,16 @@ package com.chatbot.demo.util.niveles0;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import com.chatbot.demo.util.GestorMenus;
+import com.chatbot.demo.util.Response;
 
 public class Pasivo {
 
-	private String salida = "Elija el numero del asunto que desee consultar: \n\t0. Salir\n";
+	private String salida = "Elija el numero del asunto que desee consultar:";
 	private GestorMenus gestMenus;
-	
+
 	// Opciones
 	private ArrayList<String> nivel1 = new ArrayList<>(Arrays.asList("CUENTA BBVA", "CUENTA CX", "IPF", "FONDO"));
 
@@ -19,7 +21,7 @@ public class Pasivo {
 	public Pasivo(GestorMenus gestMenus) {
 
 		this.gestMenus = gestMenus;
-		
+
 		nivel1 = new ArrayList<>(Arrays.asList("CUENTA BBVA", "CUENTA CX", "IPF", "FONDO"));
 
 		cuentabbva = new ArrayList<>(
@@ -38,59 +40,62 @@ public class Pasivo {
 	}
 
 	// Methods
-	public String getTextoNivel1() {
-		String msg = salida;
+	public Response getTextoNivel1() {
+		Response msg = new Response();
+		msg.setDescription(salida);
+		List<String> options = new ArrayList<String>();
+		options.add("Salir");
 
 		for (int i = 0; i < nivel1.size(); i++) {
-			msg += "\t" + (i + 1) + ". " + nivel1.get(i) + "\n";
+			options.add(nivel1.get(i));
 		}
-
-		msg += "Eleccion: ";
+		
+		msg.setOptions(options);
 		return msg;
 
 	}
 
-	public String pasarNivel1ANivel2(String respuesta) {
-		String msg = "";
+	public Response pasarNivel1ANivel2(String respuesta) {
+		Response msg = new Response();
+		msg.setDescription(salida);
+		List<String> options = new ArrayList<String>();
+		options.add("Salir");
 
 		try {
 			int resp = Integer.parseInt(respuesta);
-			msg = salida;
+
 			switch (resp) {
 			case 1:
 				for (int i = 0; i < cuentabbva.size(); i++) {
-					msg += "\t" + (i + 1) + ". " + cuentabbva.get(i) + "\n";
+					options.add(cuentabbva.get(i));
 				}
 
-				msg += "Eleccion: ";
 				break;
 			case 2:
 			case 3:
 			}
 
 		} catch (NumberFormatException ex) {
-			msg = salida;
 
 			String resp = respuesta.toLowerCase();
 
 		}
-
+		msg.setOptions(options);
 		return msg;
 	}
 
-	public String pasarNivel2ANivel3(String respuesta) {
-		String msg = "";
-
+	public Response pasarNivel2ANivel3(String respuesta) {
+		Response msg = new Response();
+		msg.setDescription(cuentabbva1.get(0));
+		List<String> options = new ArrayList<String>();
+		options.add("Salir");
+		
 		try {
 			int resp = Integer.parseInt(respuesta);
 			switch (resp) {
 			case 1:
-				for (int i = 0; i < cuentabbva1.size(); i++) {
-					msg += "\t" + (i + 1) + ". " + cuentabbva1.get(i) + "\n";
-				}
-
 				for (int i = 0; i < cuentabbva2.size(); i++) {
-					msg += "\t" + (i + 1) + ". " + cuentabbva2.get(i) + "\n";
+					options.add(cuentabbva2.get(i));
 				}
 				gestMenus.setNivelPreguntas(0);
 				break;
@@ -99,17 +104,15 @@ public class Pasivo {
 			}
 
 		} catch (NumberFormatException ex) {
-			msg = salida;
 
 			String resp = respuesta.toLowerCase();
 
 		}
 
+		msg.setOptions(options);
+		
 		return msg;
 	}
-	
-	
-	
 
 	public ArrayList<String> getNivel1() {
 		return nivel1;

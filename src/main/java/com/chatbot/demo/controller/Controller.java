@@ -34,12 +34,10 @@ public class Controller {
 
 	@PostMapping("sendSelection")
 	@ResponseBody
-	public String sendSelectedOption(@RequestBody OpcionSeleccionada opcion) {
-		System.out.println("Respuesta: " + opcion.getRespuesta());
+	public Response sendSelectedOption(@RequestBody OpcionSeleccionada opcion) {
+		//System.out.println("Respuesta: " + opcion.getRespuesta());
 
-		String msg = gestMenu.comprobarRespuesta(opcion.getRespuesta());
-
-		return msg;
+		return gestMenu.comprobarRespuesta(opcion.getRespuesta());
 	}
 
 }
